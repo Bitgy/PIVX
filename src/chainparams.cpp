@@ -153,6 +153,13 @@ bool CChainParams::IsValidBlockTimeStamp(const int64_t nTime, const int nHeight)
     return (nTime % TimeSlotLength()) == 0;
 }
 
+int CChainParams::Zerocoin_PublicSpendVersion(const int nHeight) const
+{
+    if (nHeight < nPublicZCSpendsV4)
+        return 3;
+    return 4;
+}
+
 class CMainParams : public CChainParams
 {
 public:
@@ -214,6 +221,7 @@ public:
 
         // Public coin spend enforcement
         nPublicZCSpends = 1880000;
+        nPublicZCSpendsV4 = 2880000;
 
         // Fake Serial Attack
         nFakeSerialBlockheightEnd = 1686229;
@@ -351,6 +359,7 @@ public:
 
         // Public coin spend enforcement
         nPublicZCSpends = 1106100;
+        nPublicZCSpendsV4 = 2106100;
 
         // Fake Serial Attack
         nFakeSerialBlockheightEnd = -1;
@@ -447,6 +456,7 @@ public:
 
         // Public coin spend enforcement
         nPublicZCSpends = 350;
+        nPublicZCSpendsV4 = 450;
 
         // Fake Serial Attack
         nFakeSerialBlockheightEnd = -1;
